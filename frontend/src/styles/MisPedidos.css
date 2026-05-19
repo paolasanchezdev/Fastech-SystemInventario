@@ -1,0 +1,268 @@
+/* ==========================================================================
+   INTERFAZ DE HISTORIAL DE PEDIDOS (MIS PEDIDOS COMPONENT)
+   ========================================================================== */
+
+.orders-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  background-color: #090d14; /* var(--bg-panel-dark) */
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.9);
+}
+
+/* Encabezado del Dashboard de Compras */
+.orders-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.orders-main-title {
+  color: #ffffff !important;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+.orders-subtitle-text {
+  color: #94a3b8; /* var(--text-secondary) */
+  font-size: 13.5px;
+  margin: 0;
+}
+
+/* Tarjeta del Balance de Inversión */
+.total-spent-card {
+  background-color: #0e131f; /* var(--bg-card-surface) */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 200px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.spent-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #475569; /* var(--text-muted) */
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.spent-value {
+  font-size: 26px;
+  font-weight: 800;
+  color: #38bdf8; /* Cian Neón de Fastech */
+  line-height: 1;
+}
+
+/* 📊 Estructura de la Tabla Real */
+.orders-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: #06090f; /* var(--bg-input) */
+  -webkit-overflow-scrolling: touch; /* Scroll ultra-suave en iOS/Android */
+}
+
+.orders-table-core {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.orders-table-core th {
+  background-color: rgba(255, 255, 255, 0.01);
+  padding: 16px;
+  color: #475569;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.order-row-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  transition: background-color 0.2s ease;
+}
+
+.order-row-item:hover {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.order-row-item:last-child {
+  border-bottom: none;
+}
+
+.orders-table-core td {
+  padding: 18px 16px;
+  vertical-align: middle;
+  color: #f1f5f9;
+}
+
+/* Celdas específicas */
+.order-id-cell {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.order-date-cell {
+  color: #94a3b8;
+}
+
+.order-details-cell {
+  color: #f1f5f9;
+  max-width: 350px;
+}
+
+.order-products-summary {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-total-cell {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+/* 🟢 Badge del Estado Electrónico */
+.order-status-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-completed {
+  background-color: rgba(16, 185, 129, 0.06);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+/* Estado de Historial Vacío */
+.empty-orders-state {
+  text-align: center;
+  padding: 64px 24px;
+}
+
+.empty-orders-icon {
+  font-size: 44px;
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+.empty-orders-state h3 {
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.empty-orders-state p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin: 0;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+/* Lista vertical de productos en la celda */
+.order-products-list-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Fila de cada artículo */
+.order-product-nested-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* Nombre del componente */
+.product-item-name {
+  color: #f1f5f9;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Indicador de cantidad (Multiplicador x1, x2) */
+.product-item-qty {
+  color: #a855f7; /* Color morado neón para resaltar la cantidad */
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(168, 85, 247, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.product-item-muted {
+  color: #64748b;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   📱 ADAPTACIÓN RESPONSIVA PARA DISPOSITIVOS MÓVILES
+   ========================================================================== */
+@media (max-width: 768px) {
+  .orders-section-container {
+    padding: 16px !important; /* Reducimos aire para aprovechar la pantalla táctil */
+    gap: 20px;
+  }
+
+  .orders-dashboard-header {
+    flex-direction: column !important; /* Apilamos título y balance verticalmente */
+    align-items: flex-start !important;
+    padding-bottom: 16px;
+  }
+
+  .total-spent-card {
+    width: 100% !important; /* El balance ahora ocupa todo el ancho cómodo en el cel */
+    box-sizing: border-box;
+    align-items: flex-start !important; /* Alineamos los textos a la izquierda */
+  }
+
+  .orders-main-title {
+    font-size: 20px; /* Un tamaño más cómodo para móvil */
+  }
+
+  .orders-table-core th, 
+  .orders-table-core td {
+    padding: 12px 10px !important; /* Reducimos el espaciado para que entren más columnas antes de hacer scroll */
+    font-size: 13px;
+  }
+
+  .order-details-cell {
+    max-width: 240px !important; /* Controlamos el ancho en el cel para que el scroll no sea infinito */
+  }
+
+  .product-item-name {
+    font-size: 12px;
+  }
+}

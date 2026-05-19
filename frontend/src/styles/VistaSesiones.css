@@ -1,0 +1,251 @@
+/* ==========================================================================
+   🛡️ CONTENEDOR GENERAL DE AUDITORÍA DE SEGURIDAD
+   ========================================================================== */
+.sessions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* Tarjeta superior de Estado de la Bitácora */
+.sessions-banner {
+  background-color: #111625;
+  border: 1px solid #243249;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.sessions-banner-icon {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sessions-banner-icon i {
+  color: #10b981;
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
+}
+
+.sessions-banner-text h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.sessions-banner-text p {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   📊 PANEL PRINCIPAL DEL REGISTRO DE CONEXIONES
+   ========================================================================== */
+.sessions-cyber-card {
+  background-color: #111625;
+  border: 1px solid #243249;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.sessions-card-header {
+  background: #0b0f19;
+  padding: 16px 20px;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sessions-card-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botón de Sincronización */
+.btn-sessions-refresh {
+  background-color: #090d16;
+  color: #22d3ee;
+  border: 1px solid #243249;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-sessions-refresh:hover:not(:disabled) {
+  border-color: #22d3ee;
+  background-color: rgba(34, 211, 238, 0.05);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+}
+
+.btn-sessions-refresh:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   📋 TABLA DE TRÁFICO Y ACCESOS (CONSOLA)
+   ========================================================================== */
+.sessions-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Deslizamiento fluido e independiente en el celular */
+}
+
+.sessions-cyber-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.sessions-cyber-table th {
+  padding: 14px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #22d3ee;
+  background-color: #0b0f19;
+  border-bottom: 2px solid #1e293b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sessions-table-row {
+  border-bottom: 1px solid #1e293b;
+  transition: background-color 0.15s;
+}
+
+.sessions-table-row:hover {
+  background-color: rgba(36, 50, 73, 0.2);
+}
+
+.sessions-table-row td {
+  padding: 14px 16px;
+  font-size: 0.85rem;
+  color: #f8fafc;
+  vertical-align: middle;
+}
+
+/* Celdas específicas */
+.session-operator-cell {
+  font-weight: 600;
+  color: #fff;
+}
+
+.session-uid-subtext {
+  display: block;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-family: monospace;
+}
+
+/* Insignia de Dirección IP (Estilo Red Local/Pública) */
+.session-ip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #10b981;
+  font-weight: 700;
+  font-family: monospace;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.05);
+}
+
+/* Insignia de Entorno / Navegador */
+.session-env-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #090d16;
+  border: 1px solid #243249;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  font-weight: 500;
+  white-space: nowrap; /* Evita que el nombre del navegador colapse en líneas rotas */
+}
+
+.sessions-empty-text {
+  text-align: center;
+  padding: 40px !important;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   📱 CONFIGURACIÓN RESPONSIVA DE SEGURIDAD MÓVIL
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Reorganizamos el banner superior para que quepa bien de forma vertical */
+  .sessions-banner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .sessions-banner-icon {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .sessions-banner-icon i {
+    font-size: 1.5rem;
+  }
+
+  /* Cabecera del panel de control */
+  .sessions-card-header {
+    flex-direction: column !important; /* Apila el título y el botón de refrescar */
+    align-items: flex-start !important;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .btn-sessions-refresh {
+    width: 100%; /* El botón ocupa todo el ancho táctil del cel */
+    justify-content: center;
+    padding: 10px;
+  }
+
+  /* Compactación del texto del registro táctil */
+  .sessions-cyber-table th,
+  .sessions-cyber-table td {
+    padding: 12px 10px !important;
+    font-size: 13px !important;
+  }
+
+  .session-ip-badge {
+    padding: 4px 8px;
+    font-size: 12px !important;
+  }
+
+  .session-env-badge {
+    padding: 4px 10px;
+    font-size: 11px !important;
+  }
+}

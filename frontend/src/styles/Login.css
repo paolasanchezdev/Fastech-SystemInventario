@@ -1,0 +1,159 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
+    padding: 16px; /* Ajustado a escala móvil base */
+    box-sizing: border-box;
+}
+
+.login-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: padding 0.3s ease; /* Transición suave al cambiar de dispositivo */
+}
+
+.login-box h2 {
+    margin: 0 0 8px 0;
+    color: #111111;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.login-subtitle {
+    margin: 0 0 25px 0;
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 6px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 16px; /* 🔥 CRUCIAL: Evita que iOS haga zoom automático molesto al enfocar */
+    background-color: #f1f5f9;
+    color: #333;
+    transition: border-color 0.2s, background-color 0.2s;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    background-color: #ffffff;
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+    -webkit-tap-highlight-color: transparent; /* Elimina el flash azul raro al tocar en celular */
+}
+
+.btn-login:hover {
+    background-color: #0056b3;
+}
+
+.btn-login:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.login-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.login-footer {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: #495057;
+    border-top: 1px solid #dee2e6;
+    padding-top: 15px;
+}
+
+/* ==========================================================================
+   📱 MEDIA QUERY: OPTIMIZACIÓN COMPLETA PARA CELULARES (Pantallas < 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px; /* Reducimos el espacio exterior */
+    }
+
+    .login-box {
+        padding: 24px 20px; /* Reducimos padding interno para ganar espacio vertical */
+        border-radius: 16px; /* Bordes un poco más curvos al estilo app móvil */
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); /* Sombra más sutil */
+    }
+
+    .login-box h2 {
+        font-size: 1.5rem; /* Letra levemente más pequeña */
+        margin-bottom: 6px;
+    }
+
+    .login-subtitle {
+        font-size: 0.88rem;
+        margin-bottom: 20px; /* Compactamos el bloque superior */
+    }
+
+    .input-group {
+        margin-bottom: 16px; /* Espacio más compacto entre inputs */
+    }
+
+    .input-group label {
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+    }
+
+    .input-group input {
+        padding: 11px; /* Caja de texto balanceada para dedos */
+    }
+
+    .btn-login {
+        padding: 12px; /* Botón óptimo para pantallas táctiles */
+        font-size: 0.95rem;
+        margin-top: 6px;
+    }
+
+    .login-footer {
+        margin-top: 20px;
+        padding-top: 12px;
+        font-size: 0.85rem; /* Ajuste del pie de página */
+    }
+}

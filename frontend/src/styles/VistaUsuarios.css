@@ -1,0 +1,296 @@
+/* ==========================================================================
+   🎮 CONTENEDOR PRINCIPAL - DISEÑO EN DOS COLUMNAS (GRID SYSTEM)
+   ========================================================================== */
+.users-crud-container {
+  display: grid;
+  grid-template-columns: 350px 1fr; /* Aumentado a 350px para dar máxima holgura al formulario */
+  gap: 25px;
+  padding: 5px;
+  align-items: start;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   🛡️ TARJETAS ESTILO CYBER-TECH (DARK MODE)
+   ========================================================================== */
+.users-cyber-card {
+  background-color: #111625;
+  border: 1px solid #243249;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.users-card-header {
+  background: #0b0f19;
+  padding: 16px 20px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.users-card-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.users-card-header h3 span {
+  color: #22d3ee;
+}
+
+.users-card-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   📝 FORMULARIO VERTICAL (BLINDADO CONTRA DESBORDES)
+   ========================================================================== */
+.users-vertical-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box; /* Previene el desborde interno */
+}
+
+.users-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+.users-form-group label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #22d3ee;
+  letter-spacing: 0.5px;
+}
+
+/* Cajas de texto y selectores corregidos */
+.users-input-field {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: #090d16;
+  border: 1px solid #243249;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.85rem;
+  outline: none;
+  box-sizing: border-box; /* 🔥 Crucial: el padding se queda adentro, no expande el input */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.users-input-field:focus {
+  border-color: #22d3ee;
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.2);
+}
+
+/* ==========================================================================
+   ⚡ BOTONES DE ACCIÓN DEL FORMULARIO
+   ========================================================================== */
+.btn-users-submit {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-sizing: border-box; /* Alineación perfecta con los inputs */
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+.btn-users-submit.btn-create {
+  background-color: #10b981;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+.btn-users-submit.btn-create:hover {
+  opacity: 0.9;
+}
+
+.btn-users-submit.btn-update {
+  background-color: #3b82f6;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
+.btn-users-submit.btn-update:hover {
+  opacity: 0.9;
+}
+
+.btn-users-cancel {
+  width: 100%;
+  padding: 9px;
+  background-color: transparent;
+  border: 1px dashed #64748b;
+  border-radius: 6px;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: -4px;
+}
+
+.btn-users-cancel:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+/* ==========================================================================
+   📋 TABLA DE MONITOREO DE USUARIOS
+   ========================================================================== */
+.users-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Deslizamiento táctil fluido */
+}
+
+.users-cyber-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.users-cyber-table th {
+  padding: 14px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #22d3ee;
+  background-color: #0b0f19;
+  border-bottom: 2px solid #1e293b;
+  letter-spacing: 0.5px;
+}
+
+.users-table-row {
+  border-bottom: 1px solid #1e293b;
+  transition: background-color 0.15s;
+}
+
+.users-table-row:hover {
+  background-color: rgba(36, 50, 73, 0.2);
+}
+
+.users-table-row td {
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: #f8fafc;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   🏷️ INSIGNIAS NEÓN (BADGES) PARA ROLES
+   ========================================================================== */
+.role-badge {
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.role-badge.admin {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.role-badge.cliente {
+  background-color: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* ==========================================================================
+   🎛️ BOTONES DE FILA (EDITAR / PURGAR)
+   ========================================================================== */
+.users-actions-cell {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn-action-icon {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-action-icon.edit {
+  background-color: rgba(234, 179, 8, 0.1);
+  color: #eab308;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.btn-action-icon.edit:hover {
+  background-color: #eab308;
+  color: #000;
+}
+
+.btn-action-icon.delete {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.btn-action-icon.delete:hover {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.users-empty-text {
+  text-align: center;
+  padding: 30px !important;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   📱 MONITOREO OPTIMIZADO PARA DISPOSITIVOS MÓVILES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  /* Rompemos las dos columnas para que se apilen (Formulario arriba, Tabla abajo) */
+  .users-crud-container {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Evitar zooms automáticos molestos del navegador móvil al enfocar inputs */
+  .users-input-field {
+    font-size: 16px !important;
+    padding: 12px;
+  }
+
+  /* Ajustes en los tamaños de celda para que quepa más info en la pantalla */
+  .users-cyber-table th, 
+  .users-cyber-table td {
+    padding: 10px 12px !important;
+    font-size: 13px !important;
+  }
+
+  .users-actions-cell {
+    flex-direction: column; /* Apila los botones de Editar y Eliminar si el espacio es crítico */
+    gap: 4px;
+  }
+
+  .btn-action-icon {
+    width: 100%;
+    padding: 6px 8px;
+  }
+}

@@ -1,0 +1,562 @@
+/* ==========================================================================
+   🧬 ESQUEMA DE VARIABLES CYBER-TECH
+   ========================================================================== */
+:root {
+  --bg-admin-main: #070a13;
+  --bg-admin-sidebar: #0d111e;
+  --bg-admin-card: #121826;
+  --accent-cyan-glow: #22d3ee;
+  --accent-blue-neon: #2563eb;
+  --border-dark-glow: #1e293b;
+  --text-light: #f8fafc;
+  --text-muted: #64748b;
+}
+
+/* ==========================================================================
+   🖥️ LAYOUT GLOBAL DEL DASHBOARD (BLINDADO CONTRA DESBORDES)
+   ========================================================================== */
+.admin-dashboard-layout {
+  display: flex;
+  width: 100%;             /* 🔥 Cambiado de 100vw a 100% para evitar bugs de scrollbar en móviles */
+  max-width: 100%;
+  height: 100vh;
+  background-color: var(--bg-admin-main);
+  color: var(--text-light);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* 🧭 Contenedor de scroll independiente a la derecha del sidebar */
+.admin-workspace-scroll-container {
+  flex-grow: 1;
+  flex-shrink: 1;          /* 🔥 Obliga al contenedor a encogerse si el viewport es pequeño */
+  min-width: 0;            /* 🔥 CRUCIAL: Rompe la rigidez de Flexbox para que los hijos (gráficos/tablas) puedan achicarse */
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;      /* Evita que todo el layout baile hacia los lados en el cel */
+  background-color: var(--bg-admin-main);
+  box-sizing: border-box;
+}
+
+/* Área interna donde se renderizan los submódulos */
+.admin-main-workspace {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;            /* 🔥 Crucial para que las rejillas internas detecten el fin de la pantalla */
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   🧬 SIDEBAR LATERAL CYBER-TECH (CON SOPORTE DE CONTRACCIÓN)
+   ========================================================================== */
+.admin-sidebar {
+  width: 280px;
+  min-width: 280px;
+  background-color: var(--bg-admin-sidebar);
+  border-right: 1px solid var(--border-dark-glow);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  height: 100vh;
+  box-sizing: border-box;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; 
+}
+
+.admin-brand-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.brand-logo-glow {
+  font-size: 20px;
+  text-shadow: 0 0 10px var(--accent-cyan-glow);
+}
+
+.brand-admin-badge {
+  background: linear-gradient(135deg, var(--accent-cyan-glow), var(--accent-blue-neon));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* Tag de Usuario Conectado */
+.admin-user-tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #161f33;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  border: 1px solid #202b44;
+}
+
+.admin-avatar-pulse {
+  width: 36px;
+  height: 36px;
+  background-color: var(--accent-blue-neon);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+}
+
+.admin-meta-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.admin-meta-role {
+  font-size: 11px;
+  color: var(--accent-cyan-glow);
+  margin: 0;
+}
+
+/* Botones de Navegación */
+.admin-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.sidebar-nav-item:hover, .sidebar-nav-item.active {
+  background-color: var(--bg-admin-card);
+  color: var(--text-light);
+  border-left: 3px solid var(--accent-cyan-glow);
+}
+
+.sidebar-nav-item.active .nav-item-icon {
+  filter: drop-shadow(0 0 5px var(--accent-cyan-glow));
+}
+
+/* Footer del Sidebar */
+.admin-sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.btn-sidebar-store {
+  padding: 10px;
+  background-color: #10b981;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: opacity 0.2s;
+}
+
+.btn-sidebar-logout {
+  padding: 10px;
+  background-color: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.btn-sidebar-store:hover, .btn-sidebar-logout:hover {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   🖥️ CABECERA DEL WORKSPACE
+   ========================================================================== */
+.workspace-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border-dark-glow);
+  padding-bottom: 16px;
+}
+
+.workspace-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.text-muted {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.system-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #111827;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 12px;
+  color: #10b981;
+  border: 1px solid #1f2937;
+}
+
+.status-dot-active {
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+}
+
+/* 🔥 BOTÓN DE HAMBURGUESA OCULTO POR DEFECTO EN ESCRITORIO */
+.mobile-menu-trigger {
+  display: none;
+  background: var(--bg-admin-card);
+  border: 1px solid var(--border-dark-glow);
+  color: var(--accent-cyan-glow);
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.1);
+}
+
+.workspace-view-container {
+  width: 100%;
+  min-width: 0;            /* 🔥 Clave para la contracción de gráficos hijos */
+}
+
+.workspace-motion-wrapper {
+  width: 100%;
+  min-width: 0;            /* 🔥 Evita heredar la rigidez horizontal */
+}
+
+/* ==========================================================================
+   📦 SUBMÓDULO INVENTARIO
+   ========================================================================== */
+.inventario-grid-layout {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 28px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+/* Paneles Oscuros */
+.cyber-panel {
+  background-color: #111625;
+  border: 1px solid var(--border-dark-glow);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  min-width: 0;            /* 🔥 Protege las tarjetas analíticas y formularios */
+}
+
+.panel-header-glow {
+  border-bottom: 1px solid var(--border-dark-glow);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+.panel-header-glow h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.panel-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 4px 0 0 0;
+}
+
+/* Formulario en Columna Fluida */
+.cyber-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-item label {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Inputs Premium */
+.cyber-form-grid input[type="text"],
+.cyber-form-grid input[type="number"],
+.cyber-form-grid select {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #090d16;
+  border: 1px solid #243249;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--text-light);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.cyber-form-grid input:focus,
+.cyber-form-grid select:focus {
+  outline: none;
+  border-color: var(--accent-cyan-glow);
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.2);
+}
+
+/* Evitar zooms automáticos molestos en inputs de celular */
+@media (max-width: 768px) {
+  .cyber-form-grid input[type="text"],
+  .cyber-form-grid input[type="number"],
+  .cyber-form-grid select {
+    font-size: 16px !important;
+  }
+}
+
+.conditional-input-box {
+  background-color: #161f33;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px dashed var(--accent-cyan-glow);
+}
+
+/* Input File Modificado */
+.file-input-wrapper {
+  background-color: #090d16;
+  border: 1px dashed #243249;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.file-input-wrapper input[type="file"] {
+  font-size: 13px;
+  color: var(--text-muted);
+  width: 100%;
+}
+
+.file-input-wrapper input[type="file"]::file-selector-button {
+  background-color: #1e293b;
+  color: var(--accent-cyan-glow);
+  border: 1px solid #334155;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 12px;
+  transition: background 0.2s;
+}
+
+/* Botones de acción */
+.form-actions-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-cyber-submit {
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, var(--accent-cyan-glow), var(--accent-blue-neon));
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-cyber-submit:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.4);
+}
+
+.btn-cyber-cancel {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #1e293b;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Alertas Neón */
+.neon-stock-alert {
+  background: linear-gradient(90deg, #2c1616, #111625);
+  border-left: 4px solid #ef4444;
+  padding: 14px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+}
+
+/* ==========================================================================
+   📊 TABLA DE ELEMENTOS
+   ========================================================================== */
+.cyber-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;                     /* 🔥 Obliga a la tabla a mantenerse dentro de su contenedor */
+}
+
+.cyber-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cyber-table th {
+  background-color: #0b0f19;
+  color: var(--accent-cyan-glow);
+  padding: 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: left;
+  border-bottom: 2px solid var(--border-dark-glow);
+}
+
+.cyber-table td {
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--border-dark-glow);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.image-table-container {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #090d16;
+  border: 1px solid #243249;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-table-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   📱 MEDIA QUERIES: ADAPTACIÓN RADICAL PARA CELULARES Y TABLETS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  
+  /* 🚨 1. TRANSFORMAR EL SIDEBAR EN UN MENÚ LATERAL OCULTO DE FORMA FLOTANTE */
+  .admin-sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh !important;
+    width: 280px !important;
+    min-width: 280px !important;
+    z-index: 99999 !important; 
+    border-radius: 0 16px 16px 0;
+    transform: translateX(-100%); 
+    opacity: 0;
+    box-shadow: 25px 0 50px rgba(0, 0, 0, 0.8) !important;
+  }
+
+  /* 🔥 CLASE ACTIVA */
+  .admin-sidebar.open {
+    transform: translateX(0) !important;
+    opacity: 1;
+  }
+
+  /* Mostrar botón de hamburguesa en la cabecera */
+  .mobile-menu-trigger {
+    display: flex;
+  }
+
+  /* 🚨 2. CAMBIAR LA GRID DE INVENTARIO A UNA SOLA COLUMNA FLUIDA */
+  .inventario-grid-layout {
+    grid-template-columns: 1fr !important; 
+    gap: 24px;
+    width: 100%;
+  }
+
+  .admin-main-workspace {
+    padding: 16px; /* 🔥 Reducido a 16px para dar máxima holgura en celulares */
+  }
+
+  .workspace-header {
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+  
+  .workspace-header h1 {
+    font-size: 20px; 
+  }
+
+  .system-status-pill {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Tabla responsiva deslizante */
+  .cyber-table th, .cyber-table td {
+    padding: 12px 10px; 
+    font-size: 13px;
+  }
+  
+  .image-table-container {
+    width: 36px;
+    height: 36px;
+  }
+}

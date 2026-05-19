@@ -1,0 +1,737 @@
+/* ==========================================================================
+   1. SYSTEM THEME VARIABLES (DEEP STEALTH / MONOCHROME + CYAN ACCENT)
+   ========================================================================== */
+:root {
+  /* Fondos Absolutos Avanzados */
+  --bg-app-base: #030508;
+  --bg-panel-dark: #090d14;
+  --bg-card-surface: #0e131f;
+  --bg-card-hover: #131b2b;
+  --bg-input: #06090f;
+  
+  /* Esquema Cromático y Enfoque de Precios */
+  --accent-primary: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.15);
+  --border-active: rgba(56, 189, 248, 0.4);
+  
+  /* Líneas de Estructura Cristalinas */
+  --border-subtle: rgba(255, 255, 255, 0.03);
+  --border-card: rgba(255, 255, 255, 0.05);
+  --border-focus: rgba(255, 255, 255, 0.2);
+
+  /* Tipografía y Estados de Texto */
+  --text-main: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --text-white: #ffffff;
+  
+  /* Semántica de Seguridad */
+  --status-green: #10b981;
+  --status-orange: #f97316;
+  --status-red: #ef4444;
+
+  /* Sombras de Densidad */
+  --shadow-deep: 0 12px 40px -12px rgba(0, 0, 0, 0.9);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --glow-subtle: 0 0 30px rgba(56, 189, 248, 0.05);
+}
+
+/* ==========================================================================
+   2. REINICIO DE ENTORNO Y SCROLL ENGINE
+   ========================================================================== */
+.store-app-container {
+  background-color: var(--bg-app-base) !important;
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.store-app-container ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.store-app-container ::-webkit-scrollbar-track {
+  background: var(--bg-app-base);
+}
+.store-app-container ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+}
+.store-app-container ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ==========================================================================
+   3. ARQUITECTURA GENERAL DEL CANVAS
+   ========================================================================== */
+.store-main-layout {
+  display: flex;
+  flex: 1;
+  padding: 32px;
+  gap: 32px;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+}
+
+.store-center-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+/* ==========================================================================
+   4. INTERFAZ DE NAVEGACIÓN SUPERIOR (NAVBAR)
+   ========================================================================== */
+.store-navbar,
+nav.store-navbar,
+[class*="navbar"] {
+  background-color: var(--bg-panel-dark) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+  padding: 16px 32px !important;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4) !important;
+}
+
+.store-navbar input,
+[class*="navbar"] input {
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease !important;
+}
+
+.store-navbar input:focus,
+[class*="navbar"] input:focus {
+  border-color: var(--border-focus) !important;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.05) !important;
+}
+
+/* ==========================================================================
+   5. INTERFAZ LATERAL IZQUIERDA (SIDEBAR DE CONTROL)
+   ========================================================================== */
+.store-sidebar,
+[class*="sidebar"],
+aside {
+  background-color: var(--bg-panel-dark) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  width: 260px !important;
+  box-shadow: var(--shadow-deep) !important;
+  box-sizing: border-box !important;
+}
+
+.store-sidebar .navigation-title,
+.store-sidebar h3,
+[class*="sidebar"] [class*="title"] {
+  color: var(--text-muted) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  margin-bottom: 20px !important;
+  display: block !important;
+}
+
+.store-sidebar button,
+.store-sidebar a,
+[class*="sidebar"] button {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.store-sidebar button:hover,
+[class*="sidebar"] button:hover {
+  background-color: var(--bg-card-surface) !important;
+  color: var(--text-white) !important;
+}
+
+.store-sidebar button.active,
+[class*="sidebar"] button[class*="active"],
+.store-sidebar button[style*="background-color"] {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  color: var(--accent-primary) !important;
+  border: 1px solid rgba(56, 189, 248, 0.15) !important;
+  font-weight: 600 !important;
+  box-shadow: inset 0 0 12px rgba(56, 189, 248, 0.02) !important;
+}
+
+/* ==========================================================================
+   6. TERMINAL DE CONTROL DERECHO (CARRITO DE COMPRAS)
+   ========================================================================== */
+.store-cart,
+[class*="cart"],
+[class*="Cart"],
+.store-cart-container {
+  background-color: var(--bg-panel-dark) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  width: 320px !important;
+  box-shadow: var(--shadow-deep) !important;
+  box-sizing: border-box !important;
+}
+
+.store-cart h2,
+[class*="cart"] h2,
+[class*="cart"] [class*="title"] {
+  color: var(--text-white) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.25px !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  padding-bottom: 16px !important;
+  margin-top: 0 !important;
+}
+
+.cart-item,
+[class*="cart-item"] {
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  margin-top: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* 🔥 TUS NUEVAS CLASES PARA ARREGLAR EL BOTÓN APILADO DEL CUPÓN */
+.coupon-wrapper-cyber {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin-top: 8px;
+}
+
+.coupon-wrapper-cyber input {
+  flex: 1 !important;
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 6px !important;
+  padding: 10px 12px !important;
+  color: var(--text-main) !important;
+  font-size: 13px !important;
+  font-family: monospace !important;
+  outline: none !important;
+}
+
+.coupon-wrapper-cyber input:focus {
+  border-color: var(--accent-primary) !important;
+}
+
+.btn-coupon-cyber {
+  background-color: var(--accent-primary) !important;
+  color: var(--bg-app-base) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 10px 16px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important; /* Evita que el texto "Aplicar" se deforme */
+  transition: opacity 0.2s ease !important;
+}
+
+.btn-coupon-cyber:hover {
+  opacity: 0.9 !important;
+}
+/* ==========================================================================
+   7. SECCIÓN HERO (CONSOLE BANNER)
+   ========================================================================== */
+.premium-slider-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  background-color: var(--bg-panel-dark);
+}
+
+.banner-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-background-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  background: rgba(3, 5, 8, 0.4);
+  padding: 6px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.slider-dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.slider-dot.dot-active {
+  width: 18px;
+  border-radius: 4px;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* ==========================================================================
+   8. SELECTOR DE CATEGORÍAS (FILTROS)
+   ========================================================================== */
+.category-filter-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch; /* Desplazamiento inercial suave en móviles */
+}
+
+/* Ocultar barra de scroll horrible de Windows en los filtros deslizantes */
+.category-filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.btn-filter-premium {
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  font-size: 12.5px;
+  font-weight: 600;
+  background-color: var(--bg-panel-dark);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.btn-filter-premium:hover {
+  background-color: var(--bg-card-surface);
+  border-color: var(--border-card);
+  color: var(--text-white);
+}
+
+.btn-filter-premium.active {
+  background-color: var(--bg-card-surface);
+  border-color: var(--border-active);
+  color: var(--accent-primary);
+  box-shadow: var(--glow-subtle);
+}
+
+/* ==========================================================================
+   9. GRID Y ENTORNO MAESTRO DE IMÁGENES
+   ========================================================================== */
+.modern-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.premium-product-card {
+  background-color: var(--bg-panel-dark);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-product-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--bg-card-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.card-image-wrapper {
+  height: 180px;
+  background-color: #ffffff !important; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
+  border-bottom: 1px solid var(--border-subtle);
+  box-sizing: border-box;
+}
+
+.card-image-wrapper img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply !important;
+  filter: contrast(1.05) saturate(1.02);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-product-card:hover .card-image-wrapper img {
+  transform: scale(1.04);
+}
+
+.stock-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.badge-in-stock {
+  background-color: #e6f4ea;
+  color: #137333;
+  border: 1px solid #fad2cf;
+}
+
+.badge-low-stock {
+  background-color: #fef7e0;
+  color: #b06000;
+  border: 1px solid #ffe4a0;
+}
+
+.badge-no-stock {
+  background-color: #fce8e6;
+  color: #c5221f;
+  border: 1px solid #fad2cf;
+}
+
+/* ==========================================================================
+   10. NUEVA FILA: CUERPO E INFORMACIÓN
+   ========================================================================== */
+.card-info-body {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.category-tag-premium {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.product-title-premium {
+  font-size: 17px; 
+  margin: 6px 0 0 0;
+  color: var(--text-main);
+  font-weight: 700;
+  line-height: 1.3;
+  min-height: 44px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price-row-premium {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.price-container-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.price-value {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--accent-primary); 
+  line-height: 1;
+}
+
+.stock-counter-text {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.btn-add-premium {
+  width: 34px; 
+  height: 34px; 
+  min-width: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  background-color: var(--bg-card-surface);
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-add-premium:hover:not(:disabled) {
+  background-color: var(--text-main);
+  color: var(--bg-app-base);
+  border-color: transparent;
+}
+
+.btn-add-premium:disabled {
+  background-color: var(--bg-input);
+  color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  cursor: not-allowed;
+}
+
+.premium-data-view {
+  background-color: var(--bg-panel-dark);
+  border: 1px solid var(--border-subtle);
+  padding: 32px;
+  border-radius: 12px;
+}
+
+/* ==========================================================================
+   📱 11. MEDIA QUERIES: RESPONSIVE TIENDA (PANTALLAS < 1024px Y CELULARES)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .store-main-layout {
+    flex-direction: column;
+    padding: 16px;
+    gap: 20px;
+  }
+  
+  .store-sidebar, [class*="sidebar"], aside {
+    width: 100% !important;
+  }
+  
+  .store-cart, [class*="cart"], [class*="Cart"], .store-cart-container {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Navbar adaptativo */
+  .store-navbar, nav.store-navbar, [class*="navbar"] {
+    padding: 12px 16px !important;
+  }
+
+  /* Ajustar el banner del carrusel para que no sea gigantesco */
+  .premium-slider-container {
+    height: 180px;
+    border-radius: 12px;
+  }
+
+  /* El selector de categorías se vuelve deslizable de forma nativa */
+  .category-filter-bar {
+    padding-left: 4px;
+  }
+
+  /* Grilla adaptable de 2 columnas exactas para ver el hardware simétrico */
+  .modern-products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+  }
+
+  .card-image-wrapper {
+    height: 130px; /* Reducimos la caja de la imagen para que quepa en el flujo vertical */
+    padding: 10px;
+  }
+
+  .card-info-body {
+    padding: 12px;
+  }
+
+  .product-title-premium {
+    font-size: 14px;
+    min-height: 36px;
+    line-height: 1.2;
+    margin-top: 4px;
+  }
+
+  .price-row-premium {
+    margin-top: 12px;
+  }
+
+  .price-value {
+    font-size: 16px;
+  }
+
+  .stock-counter-text {
+    font-size: 9.5px;
+  }
+
+  /* Botón de añadir adaptado para clicks táctiles */
+  .btn-add-premium {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 14px;
+  }
+
+  .premium-data-view {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  /* En pantallas minúsculas bajamos a 1 columna para evitar que las letras se aplasten */
+  .modern-products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .card-image-wrapper {
+    height: 160px;
+  }
+}
+
+/* ==========================================================================
+   📱 OPTIMIZACIÓN RESPONSIVA EXCLUSIVA PARA LA TIENDA DE CLIENTES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  /* Rompe la estructura de 3 columnas (Sidebar - Catálogo - Carrito) y las apila */
+  .store-main-layout {
+    flex-direction: column !important;
+    padding: 16px !important;
+    gap: 20px !important;
+  }
+  
+  /* El catálogo centrado se estira al 100% */
+  .store-center-panel {
+    width: 100% !important;
+  }
+  
+  /* El Sidebar de categorías (si está en la tienda) ocupa el ancho completo */
+  .store-sidebar, [class*="sidebar"], aside {
+    width: 100% !important;
+    padding: 16px !important;
+  }
+  
+  /* El Carrito de compras se desplaza abajo y se expande para pagar cómodo */
+  .store-cart, [class*="cart"], [class*="Cart"], .store-cart-container {
+    width: 100% !important;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Reducimos el Banner Hero para que no ocupe toda la pantalla del cel */
+  .premium-slider-container {
+    height: 160px !important;
+    border-radius: 12px !important;
+  }
+
+  /* La barra de filtros (Procesadores, RAM, etc.) se vuelve deslizable con el dedo */
+  .category-filter-bar {
+    display: flex !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    padding-bottom: 8px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .category-filter-bar::-webkit-scrollbar {
+    display: none; /* Oculta la barra de scroll para que se vea estético */
+  }
+  .btn-filter-premium {
+    white-space: nowrap !important; /* Evita que el texto de la categoría se corte en dos líneas */
+  }
+
+  /* 🔥 GRILLA DE PRODUCTOS: 2 columnas perfectas y simétricas */
+  .modern-products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* Ajustamos el contenedor de la imagen blanca del componente */
+  .card-image-wrapper {
+    height: 120px !important;
+    padding: 8px !important;
+  }
+
+  /* Espaciado del texto y precio del hardware */
+  .card-info-body {
+    padding: 12px !important;
+  }
+
+  .product-title-premium {
+    font-size: 13.5px !important;
+    min-height: 34px !important;
+    line-height: 1.2 !important;
+  }
+
+  .price-row-premium {
+    margin-top: 10px !important;
+  }
+
+  .price-value {
+    font-size: 16px !important;
+  }
+
+  /* Botón "+" más accesible para el dedo */
+  .btn-add-premium {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  /* Para celulares muy pequeños, si notas que 2 columnas se ve muy apretado, */
+  /* puedes descomentar la línea de abajo borrando las barras para que sea 1 sola columna */
+  /* .modern-products-grid { grid-template-columns: 1fr !important; } */
+}
