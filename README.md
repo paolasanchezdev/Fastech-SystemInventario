@@ -1,33 +1,62 @@
-# ⚡ Fastech Platform — Full-Stack Hardware E-Commerce & ERP Inventory System
+````markdown
+# ⚡ Fastech Platform — Full-Stack Hardware E-Commerce, ERP Inventory & Cyber-Security System
 
-Fastech es una plataforma Full-Stack desarrollada para la administración de inventario, ventas y gestión de usuarios dentro de un entorno de comercio electrónico orientado a hardware y tecnología.
+<p align="center">
+  <img src="frontend/public/screenshots/06-admin-sales-dashboard.png" width="100%">
+</p>
 
-El sistema implementa una arquitectura desacoplada basada en APIs RESTful, permitiendo la comunicación entre un frontend moderno desarrollado con React.js y un backend construido con Node.js, Express y MariaDB.
-
-Además de la gestión comercial, la plataforma incorpora módulos administrativos, control de sesiones, carga segura de imágenes, generación de comprobantes PDF y monitoreo de actividad dentro del sistema.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react">
+  <img src="https://img.shields.io/badge/Node.js-Backend-339933?style=for-the-badge&logo=node.js">
+  <img src="https://img.shields.io/badge/MariaDB-Database-003545?style=for-the-badge&logo=mariadb">
+  <img src="https://img.shields.io/badge/TailwindCSS-UI-38BDF8?style=for-the-badge&logo=tailwind-css">
+  <img src="https://img.shields.io/badge/Express.js-API-black?style=for-the-badge&logo=express">
+</p>
 
 ---
 
-# 🛠️ Stack Tecnológico
+# 📖 Descripción General
 
-## 🖥️ Frontend
+Fastech es una solución de software empresarial de extremo a extremo (**Full-Stack**) diseñada para la gestión integral de un comercio electrónico de hardware y el control operativo de inventario en tiempo real mediante un entorno ERP.
+
+El sistema implementa una arquitectura desacoplada basada en APIs RESTful, separación estricta de responsabilidades (*Separation of Concerns*) y persistencia transaccional utilizando MariaDB bajo el motor **InnoDB**.
+
+La plataforma integra:
+
+- Gestión avanzada de inventario
+- Panel administrativo ERP
+- Control de usuarios y sesiones
+- Facturación electrónica PDF
+- Auditoría de actividad
+- Seguridad perimetral
+- Sistema de cupones
+- Protección contra fuerza bruta
+- Comunicación Full-Stack mediante JSON
+
+---
+
+# 🛠️ Especificación Técnica del Stack
+
+## 🖥️ Frontend (SPA)
 
 - **React.js** → Construcción de interfaces dinámicas mediante componentes reutilizables.
-- **Vite** → Entorno de desarrollo rápido con Hot Module Replacement (HMR).
-- **Tailwind CSS** → Diseño responsive y sistema de estilos utilitarios.
-- **Context API** → Manejo global del estado de autenticación y carrito.
-- **React Router DOM** → Navegación dinámica entre módulos y vistas.
-- **Axios / Fetch API** → Comunicación asíncrona con la API REST.
+- **Vite** → Entorno de desarrollo optimizado con Hot Module Replacement (**HMR**).
+- **Tailwind CSS** → Sistema de diseño responsive basado en utilidades.
+- **Context API** → Manejo global de autenticación y carrito de compras.
+- **React Router DOM** → Navegación dinámica entre vistas protegidas.
+- **Axios** → Comunicación asíncrona centralizada con la API REST.
 
 ---
 
-## ⚙️ Backend
+## ⚙️ Backend (REST API)
 
 - **Node.js** → Entorno de ejecución del servidor.
-- **Express.js** → Framework para construcción de APIs RESTful.
-- **Multer** → Gestión y validación de carga de imágenes.
-- **Middleware personalizado** → Protección de rutas y validaciones.
-- **PDFKit** → Generación de comprobantes PDF dinámicos.
+- **Express.js** → Framework modular para APIs RESTful.
+- **Arquitectura MVC** → Separación entre rutas, controladores y lógica de negocio.
+- **Multer** → Gestión segura de carga de imágenes.
+- **PDFKit** → Generación automatizada de facturas PDF.
+- **Bcrypt** → Hashing seguro de credenciales.
+- **Express-Rate-Limit** → Mitigación de ataques automatizados.
 
 ---
 
@@ -35,10 +64,51 @@ Además de la gestión comercial, la plataforma incorpora módulos administrativ
 
 - **MariaDB Server**
 - Motor transaccional **InnoDB**
-- Relaciones mediante llaves foráneas (`FOREIGN KEY`)
+- Integridad referencial mediante `FOREIGN KEY`
+- Persistencia de usuarios, ventas y auditorías
 - Consultas agregadas (`SUM`, `COUNT`, `GROUP BY`)
-- Persistencia de ventas, usuarios y auditorías
-- Gestión de stock en tiempo real
+- Control concurrente de stock
+
+---
+
+# 📂 Arquitectura del Proyecto
+
+```text
+📁 tu-proyecto-fastech/
+├── 📁 backend/
+│   ├── 📁 config/           # Conexión a MariaDB y variables de entorno
+│   ├── 📁 controllers/      # Lógica de negocio y controladores
+│   ├── 📁 middlewares/      # Seguridad, validaciones y Multer
+│   ├── 📁 routes/           # Endpoints RESTful
+│   └── 📄 server.js         # Punto de entrada del backend
+│
+├── 📁 frontend/
+│   ├── 📁 src/
+│   │   ├── 📁 components/   # Componentes reutilizables
+│   │   ├── 📁 context/      # Context API global
+│   │   ├── 📁 hooks/        # Custom Hooks
+│   │   ├── 📁 layouts/      # Layouts generales
+│   │   ├── 📁 pages/        # Vistas principales
+│   │   ├── 📁 services/     # Consumo centralizado de API
+│   │   ├── 📁 utils/        # Utilidades auxiliares
+│   │   └── 📄 main.jsx      # Render principal de React
+│   │
+│   └── 📁 public/
+│       └── 📁 screenshots/  # Capturas utilizadas en el README
+│
+└── 📄 README.md
+````
+
+La arquitectura fue diseñada bajo un enfoque desacoplado (*Decoupled Architecture*), separando completamente la capa cliente del backend API REST.
+
+Esto permite:
+
+* Escalabilidad modular
+* Mantenimiento independiente
+* Reutilización de componentes
+* Mayor organización del código
+* Mejor control de seguridad
+* Facilidad de despliegue cloud
 
 ---
 
@@ -50,7 +120,7 @@ Además de la gestión comercial, la plataforma incorpora módulos administrativ
 
 ## 1️⃣ Catálogo General de Productos
 
-El catálogo muestra productos registrados dinámicamente desde la base de datos, permitiendo visualizar disponibilidad, precios e información detallada del hardware.
+El sistema renderiza dinámicamente productos registrados en la base de datos mostrando disponibilidad, precios y stock en tiempo real.
 
 <p align="center">
   <img src="frontend/public/screenshots/01-store-catalog.png" width="900">
@@ -60,7 +130,7 @@ El catálogo muestra productos registrados dinámicamente desde la base de datos
 
 ## 2️⃣ Sistema de Cupones y Descuentos
 
-El sistema permite aplicar cupones de descuento directamente sobre el carrito mediante manejo global de estados con Context API.
+El módulo permite aplicar descuentos dinámicos utilizando manejo global de estados mediante Context API.
 
 <p align="center">
   <img src="frontend/public/screenshots/02-store-coupons-view.png" width="900">
@@ -68,9 +138,9 @@ El sistema permite aplicar cupones de descuento directamente sobre el carrito me
 
 ---
 
-## 3️⃣ Historial de Pedidos
+## 3️⃣ Historial de Pedidos Asíncrono
 
-Los usuarios autenticados pueden consultar todas sus compras realizadas anteriormente junto a sus comprobantes correspondientes.
+Los usuarios autenticados pueden consultar órdenes realizadas anteriormente junto a sus comprobantes correspondientes.
 
 <p align="center">
   <img src="frontend/public/screenshots/03-store-orders-history.png" width="900">
@@ -80,7 +150,7 @@ Los usuarios autenticados pueden consultar todas sus compras realizadas anterior
 
 ## 4️⃣ Facturación Electrónica PDF
 
-Después de completar una compra, el sistema genera automáticamente un comprobante PDF con el detalle completo de la transacción.
+El backend genera automáticamente comprobantes PDF utilizando PDFKit y datos obtenidos desde MariaDB.
 
 <p align="center">
   <img src="frontend/public/screenshots/04-store-invoice-pdf.png" width="900">
@@ -92,11 +162,9 @@ Después de completar una compra, el sistema genera automáticamente un comproba
 
 ---
 
-## 5️⃣ Gestión de Inventario
+## 5️⃣ Gestión Centralizada de Inventario
 
-El administrador puede agregar, editar y eliminar productos desde el panel administrativo.
-
-Las imágenes son procesadas mediante Multer y almacenadas correctamente para su visualización dentro del sistema.
+El administrador puede registrar, editar y eliminar productos desde una interfaz centralizada.
 
 <p align="center">
   <img src="frontend/public/screenshots/05-admin-inventory.png" width="900">
@@ -104,9 +172,9 @@ Las imágenes son procesadas mediante Multer y almacenadas correctamente para su
 
 ---
 
-## 6️⃣ Dashboard Financiero y Analítica
+## 6️⃣ Dashboard Financiero y Analítica Comercial
 
-El dashboard administrativo muestra estadísticas generales del sistema, métricas financieras y visualización de ventas.
+El dashboard muestra estadísticas financieras y métricas generales del sistema.
 
 <p align="center">
   <img src="frontend/public/screenshots/06-admin-sales-dashboard.png" width="900">
@@ -114,9 +182,9 @@ El dashboard administrativo muestra estadísticas generales del sistema, métric
 
 ---
 
-## 7️⃣ Revisión de Facturas y Ventas
+## 7️⃣ Auditoría de Transacciones Históricas
 
-El administrador puede visualizar el detalle completo de cada venta mediante modales dinámicos dentro del dashboard.
+El administrador puede visualizar el detalle completo de ventas mediante modales dinámicos.
 
 <p align="center">
   <img src="frontend/public/screenshots/07-admin-invoice-modal.png" width="900">
@@ -124,9 +192,9 @@ El administrador puede visualizar el detalle completo de cada venta mediante mod
 
 ---
 
-## 8️⃣ Gestión de Usuarios
+## 8️⃣ Control y Gestión de Usuarios
 
-Módulo administrativo para control de usuarios registrados dentro de la plataforma.
+Módulo administrativo avanzado para control de accesos y gestión de usuarios.
 
 <p align="center">
   <img src="frontend/public/screenshots/08-admin-users.png" width="900">
@@ -138,9 +206,13 @@ Módulo administrativo para control de usuarios registrados dentro de la platafo
 
 ---
 
-## 9️⃣ Registro de Actividad y Sesiones
+## 9️⃣ Bitácora de Sesiones y Auditoría Forense
 
-El sistema registra información relacionada a accesos y actividad dentro de la plataforma para fines de monitoreo y control administrativo.
+El sistema registra automáticamente información relacionada con accesos y actividad de usuarios.
+
+* Dirección IP
+* Fecha y hora
+* Navegador y sistema operativo
 
 <p align="center">
   <img src="frontend/public/screenshots/09-admin-audit-sessions.png" width="900">
@@ -148,9 +220,9 @@ El sistema registra información relacionada a accesos y actividad dentro de la 
 
 ---
 
-## 🔟 Sistema de Autenticación
+## 🔟 Sistema de Autenticación Segura
 
-La plataforma implementa autenticación de usuarios y protección de rutas privadas para el acceso al panel administrativo.
+La plataforma implementa autenticación segura, validación de roles y mitigación contra fuerza bruta.
 
 <p align="center">
   <img src="frontend/public/screenshots/10-auth-login.png" width="900">
@@ -160,49 +232,55 @@ La plataforma implementa autenticación de usuarios y protección de rutas priva
 
 # ⚡ Funcionalidades Implementadas
 
-- Gestión completa de inventario
-- Administración de usuarios
-- Sistema de autenticación
-- Generación de facturas PDF
-- Dashboard administrativo
-- Registro de ventas
-- Gestión de pedidos
-- Sistema de cupones
-- Carga de imágenes
-- Auditoría de actividad
-- Diseño responsive
-- Comunicación mediante API REST
+* Gestión avanzada de inventario
+* ERP administrativo
+* Sistema de autenticación
+* Gestión de usuarios
+* Dashboard financiero
+* Facturación PDF
+* Historial de pedidos
+* Sistema de cupones
+* Auditoría de actividad
+* Carga segura de imágenes
+* Protección mediante Rate Limiting
+* Arquitectura desacoplada Full-Stack
+* Diseño responsive
+* Comunicación mediante API REST
 
 ---
 
-# 🚀 Instalación del Proyecto
+# 🚀 Instalación y Despliegue Local
 
 ## 📋 Requisitos
 
-- Node.js v18 o superior
-- MariaDB Server
-- npm
+* Node.js v18 o superior
+* MariaDB Server
+* npm
 
 ---
 
 ## 1️⃣ Configuración de Base de Datos
 
-Crear una base de datos llamada:
+Crear base de datos:
 
 ```sql
-fastech_db
+CREATE DATABASE fastech_db;
 ```
 
-Importar el archivo SQL del proyecto.
+Importar script SQL:
+
+```sql
+USE fastech_db;
+SOURCE ruta_del_archivo_proyecto.sql;
+```
 
 ---
 
-## 2️⃣ Backend
+## 2️⃣ Inicialización del Backend
 
 ```bash
 cd backend
 npm install
-npm run dev
 ```
 
 Crear archivo `.env`:
@@ -210,14 +288,20 @@ Crear archivo `.env`:
 ```env
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=tu_password
+DB_PASSWORD=tu_password_de_mariadb
 DB_NAME=fastech_db
 PORT=5000
 ```
 
+Ejecutar servidor:
+
+```bash
+npm run dev
+```
+
 ---
 
-## 3️⃣ Frontend
+## 3️⃣ Inicialización del Frontend
 
 ```bash
 cd frontend
@@ -233,8 +317,18 @@ http://localhost:5173
 
 ---
 
-# 👨‍💻 Autor
+# 👨‍💻 Autoría del Proyecto
 
-Desarrollado por Karla Paola Sánchez Rodríguez.
+Desarrollado por **Karla Paola Sánchez Rodríguez**.
 
-Proyecto académico orientado al desarrollo Full-Stack, gestión de inventario y desarrollo de software.
+Proyecto académico enfocado en:
+
+* Desarrollo Full-Stack
+* Sistemas ERP
+* Gestión de inventario
+* Automatización comercial
+* Desarrollo seguro de software
+* Ciberseguridad web
+
+```
+```
