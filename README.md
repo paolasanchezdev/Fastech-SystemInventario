@@ -1,4 +1,3 @@
-````markdown
 # ⚡ Fastech Platform — Full-Stack Hardware E-Commerce, ERP Inventory & Cyber-Security System
 
 <p align="center">
@@ -97,18 +96,18 @@ La plataforma integra:
 │       └── 📁 screenshots/  # Capturas utilizadas en el README
 │
 └── 📄 README.md
-````
+```
 
 La arquitectura fue diseñada bajo un enfoque desacoplado (*Decoupled Architecture*), separando completamente la capa cliente del backend API REST.
 
 Esto permite:
 
-* Escalabilidad modular
-* Mantenimiento independiente
-* Reutilización de componentes
-* Mayor organización del código
-* Mejor control de seguridad
-* Facilidad de despliegue cloud
+- Escalabilidad modular
+- Mantenimiento independiente
+- Reutilización de componentes
+- Mayor organización del código
+- Mejor control de seguridad
+- Facilidad de despliegue cloud
 
 ---
 
@@ -210,9 +209,9 @@ Módulo administrativo avanzado para control de accesos y gestión de usuarios.
 
 El sistema registra automáticamente información relacionada con accesos y actividad de usuarios.
 
-* Dirección IP
-* Fecha y hora
-* Navegador y sistema operativo
+- Dirección IP
+- Fecha y hora
+- Navegador y sistema operativo
 
 <p align="center">
   <img src="frontend/public/screenshots/09-admin-audit-sessions.png" width="900">
@@ -232,20 +231,20 @@ La plataforma implementa autenticación segura, validación de roles y mitigaci�
 
 # ⚡ Funcionalidades Implementadas
 
-* Gestión avanzada de inventario
-* ERP administrativo
-* Sistema de autenticación
-* Gestión de usuarios
-* Dashboard financiero
-* Facturación PDF
-* Historial de pedidos
-* Sistema de cupones
-* Auditoría de actividad
-* Carga segura de imágenes
-* Protección mediante Rate Limiting
-* Arquitectura desacoplada Full-Stack
-* Diseño responsive
-* Comunicación mediante API REST
+- Gestión avanzada de inventario
+- ERP administrativo
+- Sistema de autenticación
+- Gestión de usuarios
+- Dashboard financiero
+- Facturación PDF
+- Historial de pedidos
+- Sistema de cupones
+- Auditoría de actividad
+- Carga segura de imágenes
+- Protección mediante Rate Limiting
+- Arquitectura desacoplada Full-Stack
+- Diseño responsive
+- Comunicación mediante API REST
 
 ---
 
@@ -253,9 +252,9 @@ La plataforma implementa autenticación segura, validación de roles y mitigaci�
 
 ## 📋 Requisitos
 
-* Node.js v18 o superior
-* MariaDB Server
-* npm
+- Node.js v18 o superior
+- MariaDB Server
+- npm
 
 ---
 
@@ -323,12 +322,9 @@ Desarrollado por **Karla Paola Sánchez Rodríguez**.
 
 Proyecto académico enfocado en:
 
-* Desarrollo Full-Stack
-* Sistemas ERP
-* Gestión de inventario
-* Automatización comercial
-* Desarrollo seguro de software
-* Ciberseguridad web
-
-```
-```
+- Desarrollo Full-Stack
+- Sistemas ERP
+- Gestión de inventario
+- Automatización comercial
+- Desarrollo seguro de software
+- Ciberseguridad web
