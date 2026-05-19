@@ -157,3 +157,29 @@
         font-size: 0.85rem; /* Ajuste del pie de página */
     }
 }
+
+/* Botón para volver al inicio/tienda */
+.btn-back-home {
+  background: none;
+  border: none;
+  color: #6c757d;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-back-home:hover {
+  color: #007bff; /* Cambia al azul característico al pasar el mouse */
+  transform: translateX(-3px); /* Hace un pequeño efecto de empuje hacia la izquierda */
+}
+
+.btn-back-home:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}

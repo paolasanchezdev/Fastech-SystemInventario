@@ -19,18 +19,14 @@ export default function Login({ cambiarVista, setUsuarioLogueado }) {
     }
 
     try {
-      // 🔥 CORREGIDO: Log limpio sin localhost para evitar confusiones en consola
       console.log("Disparando petición de login mediante la ruta del proxy USB...");
       
-      // 🛡️ El propio backend registrará la auditoría internamente al procesar esta petición
-      // 🔥 CORREGIDO: Ruta relativa limpia para interceptar con el proxy
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ correo, password })
       });
 
-      // Control total: leemos la respuesta como texto plano primero por seguridad
       const textoRespuesta = await res.text();
       console.log("Respuesta cruda del servidor:", textoRespuesta);
 
@@ -46,7 +42,6 @@ export default function Login({ cambiarVista, setUsuarioLogueado }) {
       }
 
       if (data && data.token && data.usuario) {
-        // Almacenamos el token y los datos de sesión en el almacenamiento local
         localStorage.setItem('fastech_token', data.token);
         localStorage.setItem('fastech_user', JSON.stringify(data.usuario));
 
@@ -54,7 +49,6 @@ export default function Login({ cambiarVista, setUsuarioLogueado }) {
           setUsuarioLogueado(data.usuario);
         }
         
-        // Redirección inteligente basada en el rol del operador
         if (data.usuario.rol === 'admin') {
           cambiarVista('dashboard');
         } else {
@@ -76,10 +70,20 @@ export default function Login({ cambiarVista, setUsuarioLogueado }) {
   return (
     <div className="login-container">
       <div className="login-box">
+        
+        {/* 🔄 BOTÓN AGREGADO: Regresar a inicio de forma segura */}
+        <button 
+          type="button" 
+          className="btn-back-home" 
+          onClick={() => cambiarVista('inicio')}
+          disabled={cargando}
+        >
+          ← Volver a Inicio
+        </button>
+
         <h2>Fastech Platform</h2>
         <p className="login-subtitle">Inicia sesión para continuar</p>
 
-        {/* Letras rojas de advertencia si algo falla */}
         {error && (
           <div className="login-error" style={{ backgroundColor: '#fee2e2', color: '#991b1b', padding: '10px', borderRadius: '6px', marginBottom: '15px', fontSize: '13px', border: '1px solid #fca5a5' }}>
             {error}

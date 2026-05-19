@@ -7,6 +7,9 @@ export default function Registro({ cambiarVista, setUsuarioLogueado }) {
   const [password, setPassword] = useState('');
   const [cargando, setCargando] = useState(false);
 
+  // Estado local simple para simular el efecto :hover en el botón de regresar
+  const [isHovered, setIsHovered] = useState(false);
+
   const manejarRegistro = async (e) => {
     e.preventDefault();
 
@@ -23,8 +26,6 @@ export default function Registro({ cambiarVista, setUsuarioLogueado }) {
     setCargando(true);
 
     try {
-      // 1️⃣ PASO 1: Crear la cuenta en el backend
-      // 🔥 CORREGIDO: Ruta relativa para el alta de usuarios vía USB
       const resRegistro = await fetch('/api/auth/registrar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -37,14 +38,12 @@ export default function Registro({ cambiarVista, setUsuarioLogueado }) {
         throw new Error(dataRegistro.error || 'No se pudo procesar el alta en el servidor.');
       }
 
-      // 2️⃣ PASO 2: ¡AUTO-LOGIN! Disparar petición automática al Login inmediatamente
       console.log("🚀 Registro exitoso. Disparando petición de login automática...");
       
-      // 🔥 CORREGIDO: Ruta relativa para el login automático seguro
       const resLogin = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ correo, password }) // Usamos las mismas credenciales del formulario
+        body: JSON.stringify({ correo, password })
       });
 
       const dataLogin = await resLogin.json();
@@ -53,18 +52,13 @@ export default function Registro({ cambiarVista, setUsuarioLogueado }) {
         throw new Error(dataLogin.error || 'Cuenta creada, pero falló el inicio de sesión automático.');
       }
 
-      // 3️⃣ PASO 3: Guardar sesión y activar banderas de la tienda
       if (dataLogin && dataLogin.token && dataLogin.usuario) {
-        // Guardamos los datos de sesión idéntico a como lo hace tu Login.jsx
         localStorage.setItem('fastech_token', dataLogin.token);
         localStorage.setItem('fastech_user', JSON.stringify(dataLogin.usuario));
         
-        // Activamos el cupón de bienvenida para nuevos usuarios
         sessionStorage.setItem('es_nuevo_usuario', 'true');
 
-        // 🛡️ Guardar en la bitácora de auditoría (Ruta corregida sin error 404)
         try {
-          // 🔥 CORREGIDO: Ruta relativa para inyectar el log de auditoría remota
           await fetch('/api/auth/auditoria', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -79,12 +73,10 @@ export default function Registro({ cambiarVista, setUsuarioLogueado }) {
           console.error("Error silencioso al guardar bitácora:", auditErr);
         }
 
-        // Cargamos al usuario en la memoria global de App.js si existe el set
         if (setUsuarioLogueado) {
           setUsuarioLogueado(dataLogin.usuario);
         }
 
-        // Mostramos alerta de éxito total
         Swal.fire({
           icon: 'success',
           title: `¡Bienvenido, ${dataLogin.usuario.nombre}!`,
@@ -93,7 +85,6 @@ export default function Registro({ cambiarVista, setUsuarioLogueado }) {
           showConfirmButton: false
         });
 
-        // 🚀 Redirigir directamente a la Tienda sin pasar por el Login
         if (cambiarVista) {
           cambiarVista('tienda');
         }
@@ -102,7 +93,6 @@ export default function Registro({ cambiarVista, setUsuarioLogueado }) {
       }
 
     } catch (err) {
-      // Limpieza de seguridad ante fallos intermedios
       localStorage.removeItem('fastech_token');
       localStorage.removeItem('fastech_user');
       
@@ -119,7 +109,33 @@ export default function Registro({ cambiarVista, setUsuarioLogueado }) {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#0f172a' }}>
-      <div style={{ backgroundColor: '#1e293b', padding: '40px', borderRadius: '16px', width: '100%', maxWidth: '400px', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.3)', border: '1px solid #334155' }}>
+      <div style={{ backgroundColor: '#1e293b', padding: '40px', borderRadius: '16px', width: '100%', maxWidth: '400px', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.3)', border: '1px solid #334155', position: 'relative' }}>
+        
+        {/* 🔄 BOTÓN AGREGADO: Regresar a la vista de Inicio con estilo integrado */}
+        <button 
+          type="button"
+          onClick={() => cambiarVista && cambiarVista('inicio')}
+          disabled={cargando}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: isHovered ? '#38bdf8' : '#94a3b8',
+            fontSize: '14px',
+            fontWeight: '500',
+            cursor: cargando ? 'not-allowed' : 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '20px',
+            padding: '0',
+            transition: 'color 0.2s ease, transform 0.2s ease',
+            transform: isHovered ? 'translateX(-3px)' : 'none'
+          }}
+        >
+          ← Volver al Inicio
+        </button>
+
         <h2 style={{ color: '#fff', margin: '0 0 10px 0', fontSize: '24px', textAlign: 'center' }}>Crear Cuenta</h2>
         <p style={{ color: '#94a3b8', fontSize: '14px', textAlign: 'center', marginBottom: '24px' }}>Regístrate para gestionar tus pedidos y cupones</p>
 
