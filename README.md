@@ -1,4 +1,4 @@
-# ⚡ Fastech Platform — Full-Stack Hardware E-Commerce, ERP Inventory & Cyber-Security System
+# ⚡ Fastech Platform
 
 <p align="center">
   <img src="frontend/public/screenshots/06-admin-sales-dashboard.png" width="100%">
