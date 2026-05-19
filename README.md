@@ -279,8 +279,8 @@ SOURCE ruta_del_archivo_proyecto.sql;
 
 ```bash
 cd backend
-npm install
-```
+npm install "librerias"
+node src/server.js```
 
 Crear archivo `.env`:
 
@@ -304,14 +304,14 @@ npm run dev
 
 ```bash
 cd frontend
-npm install
-npm run dev
+npm install "librerias"
+npm start
 ```
 
 Abrir en navegador:
 
 ```text
-http://localhost:5173
+http://localhost:"puerto"
 ```
 
 ---
